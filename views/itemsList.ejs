@@ -15,8 +15,9 @@ Il y a bootsrap 5 dans le fichier index.ejs
   <body>
     <%- include('partials/navbar.ejs') %>
     <h1 ><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-
+    <%- include('partials/liste.ejs') %>
+    <%- include('partials/add.ejs') %>
+    
     <%- include('partials/footer.ejs') %>
   </body>
 </html>

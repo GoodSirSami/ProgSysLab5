@@ -1,0 +1,30 @@
+<div class="mt-4 p-5 bg-light text-white rounded">
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date de création</th>
+                <th>Nom</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <Tbody>
+            <% items.items.forEach((item, index)=> { %>
+                <tr>
+                    <td>
+                        <%= item.getId() %>
+                    </td>
+                    <td>
+                        <%= item.getDate() %>
+                    </td>
+                    <td>
+                        <%= item.getName() %>
+                    </td>
+                    <td>
+                        <%= item.getPrice() %>
+                    </td>
+                </tr>
+                <% }); %>
+        </Tbody>
+    </table>
+</div>
