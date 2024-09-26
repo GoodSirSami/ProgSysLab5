@@ -1,6 +1,5 @@
 class Item {
-    constructor(id, name, price) {
-        this.id = id;
+    constructor(name, price) {
         this.name = name;
         this.price = price;
         this.date = new Date();
@@ -16,10 +15,6 @@ class Item {
 
     getDate() {
         return this.date.getFullYear().toString() + '-' + (this.date.getMonth() + 1).toString().padStart(2,0) + '-' + this.date.getDay().toString().padStart(2,0);
-    }
-
-    getId() {
-        return this.id;
     }
 
     setName(name) {
@@ -39,16 +34,23 @@ class ItemList {
     constructor() {
         this.items = [];
     }
-    addItem(id, name, price) {
-        this.items.push(new Item(id, name, price));
+    addItem(name, price) {
+        this.items.push(new Item(name, price));
     }
     removeItemByName(name) {
+        var l = this.items.length;
         this.items = this.items.filter(i => i.getName() !== name);
+        if (l === this.items.length) {
+            console.log('Item not found');
+        }
     }
     removeItemById(id) {
-        this.items = this.items.filter(i => i.getId() !== id);
+        var l = this.items.length;
+        this.items.splice(id, 1);
+        if (l === this.items.length) {
+            console.log('Item not found');
+        }
     }
 }
-
 
 module.exports = { Item, ItemList };

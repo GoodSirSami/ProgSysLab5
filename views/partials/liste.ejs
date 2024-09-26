@@ -12,7 +12,7 @@
             <% items.items.forEach((item, index)=> { %>
                 <tr>
                     <td>
-                        <%= item.getId() %>
+                        <%= index %>
                     </td>
                     <td>
                         <%= item.getDate() %>
@@ -21,7 +21,7 @@
                         <%= item.getName() %>
                     </td>
                     <td>
-                        <%= item.getPrice() %>
+                        <%= item.getPrice() %>$
                     </td>
                 </tr>
                 <% }); %>
