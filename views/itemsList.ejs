@@ -19,5 +19,27 @@ Il y a bootsrap 5 dans le fichier index.ejs
     <%- include('partials/add.ejs') %>
     <%- include('partials/remove.ejs') %>
     <%- include('partials/footer.ejs') %>
+    <script>
+      var socket = io.connect('http://localhost:3000');
+      var client = mqtt.connect('mqtt://localhost:1883');
+      client.on('connect', function () {
+        client.subscribe('ITEM');
+      });
+
+      $('form').submit(function(){
+        switch($(this).attr('id')){
+          case 'add':
+            client.publish('ITEM', JSON.stringify({name: $('input[name="name"]').val(), price: $('input[name="price"]').val()}));
+            break;
+          case '/users/removebyid':
+            client.publish('ITEM/REMOVE/ID',  $(this).find('input').val());
+            break;
+          case '/users/removebyname':
+            client.publish('ITEM/REMOVE/NAME', $(this).find('input').val());
+            break;
+        }
+        return false;
+      });
+    </script>
   </body>
 </html>
