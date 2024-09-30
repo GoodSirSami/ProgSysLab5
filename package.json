@@ -1,6 +1,6 @@
 {
   "name": "progsyslab5",
-  "version": "0.0.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -14,5 +14,14 @@
     "morgan": "~1.9.1",
     "mqtt": "^5.10.1",
     "socket.io": "^4.8.0"
-  }
+  },
+  "description": "Generated HTML table with socket.io and MQTT",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "ProgSysLab5"
+  },
+  "author": "Samuel Des Cormiers",
+  "license": "ISC"
 }

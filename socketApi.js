@@ -1,3 +1,10 @@
+/**
+ * @author Samuel Des Cormiers
+ * @description This file contains the code for socketio.
+ * @date 2024-09-30
+ * @version 1.0
+ */
+
 var socket_io = require('socket.io');
 var io = socket_io();
 var socketApi = {};

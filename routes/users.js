@@ -1,3 +1,16 @@
+/**
+ * @author Samuel Des Cormiers
+ * @description This file contains the code for the item and items objects.
+ * @date 2024-09-30
+ * @requires mqtt
+ * @requires socketApi
+ * @requires express
+ * @requires express.Router
+ * @requires Item
+ * @requires ItemList
+ * @version 2.0
+ */
+
 var express = require('express');
 var router = express.Router();
 var { io } = require('../socketApi');
@@ -55,7 +68,7 @@ client.on('message', function(topic, message) {
   }
   var str = '';
   liste.items.forEach((item, index) => {
-    str += '<tr><td>' + index + '</td><td>' + item.getDate() + '</td><td>' + item.getName() + '</td><td>' + item.getPrice() + '$</td></tr>';
+    str += '<tr><td>' + item.getId() + '</td><td>' + item.getDate() + '</td><td>' + item.getName() + '</td><td>' + item.getPrice() + '$</td></tr>';
   });
   io.sockets.emit('itemsChanged', str);
 });
