@@ -9,37 +9,57 @@ Il y a bootsrap 5 dans le fichier index.ejs
 -->
 <!DOCTYPE html>
 <html lang="fr-FR">
-  <head>
-    <%- include('partials/head.ejs') %>
-  </head>
-  <body>
-    <%- include('partials/navbar.ejs') %>
-    <h1 ><%= title %></h1>
-    <%- include('partials/liste.ejs') %>
-    <%- include('partials/add.ejs') %>
-    <%- include('partials/remove.ejs') %>
-    <%- include('partials/footer.ejs') %>
-    <script>
-      var socket = io.connect('http://localhost:3000');
-      var client = mqtt.connect('mqtt://localhost:1883');
-      client.on('connect', function () {
-        client.subscribe('ITEM');
-      });
 
-      $('form').submit(function(){
-        switch($(this).attr('id')){
-          case 'add':
-            client.publish('ITEM', JSON.stringify({name: $('input[name="name"]').val(), price: $('input[name="price"]').val()}));
-            break;
-          case '/users/removebyid':
-            client.publish('ITEM/REMOVE/ID',  $(this).find('input').val());
-            break;
-          case '/users/removebyname':
-            client.publish('ITEM/REMOVE/NAME', $(this).find('input').val());
-            break;
+<head>
+  <%- include('partials/head.ejs') %>
+</head>
+
+<body>
+  <%- include('partials/navbar.ejs') %>
+  <h1>
+    <%= title %>
+  </h1>
+  <%- include('partials/liste.ejs') %>
+  <%- include('partials/add.ejs') %>
+  <%- include('partials/remove.ejs') %>
+  <%- include('partials/footer.ejs') %>
+  <script>
+      var socket = io.connect('http://localhost:3000');
+      $('form').submit(function () {
+        switch ($(this).attr('id')) {
+        case 'add':
+          socket.emit('add', {
+            name: $('input[name=name]').val(),
+            price: $('input[name=price]').val()
+          });
+          socket.broadcast.emit('add', {
+            name: $('input[name=name]').val(),
+            price: $('input[name=price]').val()
+          });
+          break;
+        case 'removebyid':
+          socket.emit('removebyid', {
+            id: $('input[name=id]').val()
+          });
+          socket.broadcast.emit('removebyid', {
+            id: $('input[name=id]').val()
+          });
+          break;
+        case 'removebyname':
+          socket.emit('removebyname', {
+            name: $('input[name=namer]').val()
+          });
+          socket.broadcast.emit('removebyname', {
+            name: $('input[name=namer]').val()
+          });
+          break;
         }
         return false;
       });
-    </script>
-  </body>
+      socket.on('itemsChanged', function (data) {
+        $('table tbody').html(data);
+      });
+  </script>
+</body>
+
 </html>

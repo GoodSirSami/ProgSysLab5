@@ -1,11 +1,11 @@
 <div class="mt-4 p-5 jumbotron">
     <h2>Supprimer un item</h2>
-    <form id="removebyid">
+    <form id="removebyid" onsubmit="return false;">
         <input type="number" name="id" placeholder="ID de l'item" class="form-control">
         <button type="submit" class="btn btn-danger mt-2">Supprimer</button>
     </form>
-    <form id="removebyname">
-        <input type="text" name="name" placeholder="Nom de l'item" class="form-control mt-2">
+    <form id="removebyname" onsubmit="return false;">
+        <input type="text" name="namer" placeholder="Nom de l'item" class="form-control mt-2">
         <button type="submit" class="btn btn-danger mt-2">Supprimer</button>
     </form>
 </div>
